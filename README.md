@@ -1,2 +1,2 @@
 # Raspberry Pi Car: Python+TouchOSC
-Rasberry Pi car as AP controlled by TouchOSC app via WiFi
+Rasberry Pi 2B car configured as an AP and controlled by TouchOSC app via WiFi
