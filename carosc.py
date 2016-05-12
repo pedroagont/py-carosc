@@ -46,52 +46,42 @@ def tilt(path, tags, args, source):
     t.ChangeDutyCycle(tilt)
 
 
+
+
 # XY PAD
 def xypad(path, tags, args, source):
     xx=int(args[0]) #Gets X value from XY pad
     yy=int(args[1]) #Gets Y value from XY pad
 
     if yy>130:
-        GPIO.output(11, False)
         GPIO.output(12, True)
-        GPIO.output(15, False)
         GPIO.output(13, True)
-	print “Moving Forward”, yy
+	print "Moving Forward", yy
 
     if yy<70:
 	GPIO.output(11, True)
-        GPIO.output(12, False)
         GPIO.output(15, True)
-        GPIO.output(13, False)
-	print “Moving Backwards”, yy
+	print "Moving Backwards", yy
 
     if xx<70:
 	GPIO.output(11, True)
-	GPIO.output(12, False)
-	GPIO.output(15, False)
 	GPIO.output(13, True)
-	print “Turning Left”, xx
+	print "Turning Left", xx
 
     if xx>130:
-	GPIO.output(11, False)
 	GPIO.output(12, True)
 	GPIO.output(15, True)
-	GPIO.output(13, False)
-	print “Turning Right”, xx
+	print "Turning Right", xx
 
     if xx<70 and yy<100:
-        GPIO.output(11, False)
         GPIO.output(12, True)
         GPIO.output(15, True)
-        GPIO.output(13, False)
-        print “Reverse-Left”, xx, ",", yy
+        print "Reverse-Left", xx, ",", yy
 
     if xx>130 and yy<100:
         GPIO.output(11, True)
-        GPIO.output(12, False)
-        GPIO.output(15, False)
         GPIO.output(13, True)
-        print “Reverse-Right”, xx, ",", yy
+        print "Reverse-Right", xx, ",", yy
 
     if yy>70 and yy<130:
       if xx>70 and xx<130:
@@ -99,12 +89,13 @@ def xypad(path, tags, args, source):
         GPIO.output(12, False)
         GPIO.output(15, False)
         GPIO.output(13, False)
-        print “Stop”, xx, ",", yy
+        print "Stop", xx, ",", yy
 
 
 server.addMsgHandler("/1/pan", pan)
 server.addMsgHandler("/1/tilt", tilt)
 server.addMsgHandler("/1/xyPad", xypad)
+server.addMsgHandler("/1/xyPad/z", touch)
 
 
 while True:
